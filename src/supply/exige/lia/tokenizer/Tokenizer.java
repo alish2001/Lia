@@ -1,10 +1,10 @@
-package supply.exige.lia.Tokenizer;
+package supply.exige.lia.tokenizer;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Tokenizer {
-
+	
     // Register regex patterns for tokens
     private final TokenData[] tokenDatas =  new TokenData[]{new TokenData(Pattern.compile("^([a-zA-Z][a-zA-Z0-9]*)"), TokenType.IDENTIFIER),
             new TokenData(Pattern.compile("^((-)?[0-9]+)"), TokenType.INTEGER),

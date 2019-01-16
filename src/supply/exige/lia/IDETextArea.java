@@ -1,25 +1,24 @@
 package supply.exige.lia;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 
-public class IDETextArea extends JScrollPane {
-	
-	private static JTextArea inputArea = new JTextArea();
-	
+import javax.swing.JTextArea;
+
+public class IDETextArea extends JTextArea {
+
 	public IDETextArea() {
-		super(inputArea,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		inputArea.setFont(new Font("Consolas", Font.PLAIN, 18));
-		inputArea.setForeground(Color.BLACK);
-		inputArea.setBackground(Color.WHITE);
-
+		setFont(new Font("Consolas", Font.PLAIN, 18));
+		setForeground(Color.BLACK);
+		setBackground(Color.WHITE);
+		setEditable(true);
 	}
 
-	public IDETextArea(Font font, Color fgColor, Color bgColor) {
-		super(inputArea,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		inputArea.setFont(font);
-		inputArea.setForeground(fgColor);
-		inputArea.setBackground(bgColor);
+	public IDETextArea(Color fgColor, Color bgColor, boolean editable) {
+		setFont(new Font("Consolas", Font.PLAIN, 18));
+		setForeground(fgColor);
+		setBackground(bgColor);
+		setEditable(editable);
 	}
 
 }

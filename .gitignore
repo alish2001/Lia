@@ -3,3 +3,4 @@ nbactions.xml
 .idea
 *.iml
 *.class
+/bin1/

@@ -1,9 +1,9 @@
 package supply.exige.lia.parser;
 
 import supply.exige.lia.Runtime;
-import supply.exige.lia.Tokenizer.Token;
-import supply.exige.lia.Tokenizer.TokenType;
-import supply.exige.lia.Tokenizer.Tokenizer;
+import supply.exige.lia.tokenizer.Token;
+import supply.exige.lia.tokenizer.TokenType;
+import supply.exige.lia.tokenizer.Tokenizer;
 import supply.exige.lia.variables.VarType;
 import supply.exige.lia.variables.Variable;
 

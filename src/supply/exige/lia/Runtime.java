@@ -1,7 +1,7 @@
 package supply.exige.lia;
 
-import supply.exige.lia.Tokenizer.Tokenizer;
 import supply.exige.lia.parser.*;
+import supply.exige.lia.tokenizer.Tokenizer;
 import supply.exige.lia.variables.Variable;
 
 import java.util.ArrayList;

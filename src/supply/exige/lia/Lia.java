@@ -18,7 +18,7 @@ public class Lia {
         ScriptEngine engine = m.getEngineByName("JavaScript");
         String evalu = "(2+2)*5";
         System.out.println(engine.eval(evalu));
-        //ide = new IDE();
+        ide = new IDE();
     }
     //https://stackoverflow.com/questions/3422673/how-to-evaluate-a-math-expression-given-in-string-form
 }

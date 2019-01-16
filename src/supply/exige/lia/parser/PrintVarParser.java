@@ -1,7 +1,7 @@
 package supply.exige.lia.parser;
 
 import supply.exige.lia.Runtime;
-import supply.exige.lia.Tokenizer.Tokenizer;
+import supply.exige.lia.tokenizer.Tokenizer;
 
 public class PrintVarParser extends Parser {
 

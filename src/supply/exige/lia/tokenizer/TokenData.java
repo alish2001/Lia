@@ -1,4 +1,4 @@
-package supply.exige.lia.Tokenizer;
+package supply.exige.lia.tokenizer;
 
 import java.util.regex.Pattern;
 

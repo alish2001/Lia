@@ -1,6 +1,6 @@
 package supply.exige.lia.parser;
 
-import supply.exige.lia.Tokenizer.Tokenizer;
+import supply.exige.lia.tokenizer.Tokenizer;
 
 public abstract class Parser {
 
