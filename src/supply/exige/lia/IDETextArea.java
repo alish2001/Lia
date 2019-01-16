@@ -1,10 +1,7 @@
 package supply.exige.lia;
 
-import java.awt.Color;
-import java.awt.Font;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
+import java.awt.*;
 
 public class IDETextArea extends JScrollPane {
 	
@@ -15,6 +12,7 @@ public class IDETextArea extends JScrollPane {
 		inputArea.setFont(new Font("Consolas", Font.PLAIN, 18));
 		inputArea.setForeground(Color.BLACK);
 		inputArea.setBackground(Color.WHITE);
+
 	}
 
 	public IDETextArea(Font font, Color fgColor, Color bgColor) {

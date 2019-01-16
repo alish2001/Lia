@@ -1,8 +1,8 @@
 package supply.exige.lia;
 
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 
 public class IDE extends JFrame {
 	
@@ -22,7 +22,8 @@ public class IDE extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close When the exit button is pressed
 		setLocationRelativeTo(null); // Center window
 		setTitle("Lia IDE | IN-DEV v0.0");
-		initializeElements();
+
+		//initializeElements();
 		
 		setVisible(true); // Show window
 	}
