@@ -11,7 +11,7 @@ public class VariableParser extends Parser {
 
     @Override
     public boolean shouldParse(String line) {
-        return line.matches("var[\\s]+[a-zA-Z]+[\\s]+[a-zA-Z]+[\\s]*=[\\s]*\"?.*\"?");
+        return line.matches("var[\\s]+[a-zA-Z]+[\\s]+[a-zA-Z][a-zA-Z0-9]*[\\s]*=[\\s]*\\\"?.*\\\"?");
     }
 
     @Override

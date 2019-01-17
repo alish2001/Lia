@@ -12,8 +12,8 @@ public class PrintVarParser extends Parser {
 
     @Override
     public void parse(Tokenizer tokenizer) {
-        tokenizer.nextToken(); // Skip "print" token
-        tokenizer.nextToken(); // Skip "(" token
+        System.out.println(tokenizer.nextToken()); // Skip "print" token
+        System.out.println(tokenizer.nextToken()); // Skip "(" token
         Runtime.print(Runtime.getVariable(tokenizer.nextToken().toString()).getValue());
         tokenizer.nextToken(); // Skip ")" token
     }

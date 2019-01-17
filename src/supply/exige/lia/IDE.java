@@ -43,11 +43,10 @@ public class IDE extends JFrame {
 		output.append("<Lia Interpreter v1.0>\n");
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		
-		JScrollPane pane = new JScrollPane(input, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		JScrollPane pane2 = new JScrollPane(output, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//inputPanel.add();
-		mainPanel.add(pane);
-		mainPanel.add(pane2);
+		JScrollPane inputPane = new JScrollPane(input, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JScrollPane outputPane = new JScrollPane(output, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		mainPanel.add(inputPane);
+		mainPanel.add(outputPane);
 		JButton button = new JButton("Run");
 		button.setSize(new Dimension(100, 10));
 		mainPanel.add(button);
