@@ -7,7 +7,7 @@ public class PrintIntParser extends Parser{
 
     @Override
     public boolean shouldParse(String line) {
-        return line.matches("print[\\s]*\\([\\s]*(-)?[0-9]+\\)");
+        return line.matches("[\\s]*print[\\s]*\\([\\s]*(-)?[0-9]+\\)");
     }
 
     @Override

@@ -12,8 +12,8 @@ public class Tokenizer {
             new TokenData(Pattern.compile("^(=)"), TokenType.TOKEN),
             new TokenData(Pattern.compile("^(\\()"), TokenType.TOKEN),
             new TokenData(Pattern.compile("^(\\))"), TokenType.TOKEN),
-            new TokenData(Pattern.compile("^(\\.)"), TokenType.TOKEN),
-            new TokenData(Pattern.compile("^(\\,)"), TokenType.TOKEN)};
+            new TokenData(Pattern.compile("^(\\+)"), TokenType.TOKEN),
+            new TokenData(Pattern.compile("^(\\.)"), TokenType.TOKEN)}; // add expression processing token {}
 
     private String input;
 

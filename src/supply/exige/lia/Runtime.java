@@ -8,22 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Runtime {
-    // TODO: OBJECT
 
-    final static Parser[] parsers = new Parser[]{new VariableParser(), new PrintVarParser(), new PrintStringParser(), new PrintIntParser()};
+    final static Parser[] parsers = new Parser[]{new VariableParser(), new VariableAssignmentParser(), new PrintVarParser(), new PrintStringParser(), new PrintIntParser()};
 
-    public static String code = "";
     public static List<Variable> variables = new ArrayList<>();
 
-    public static void run() {
-       /* Tokenizer t = new Tokenizer(code);
-        while (t.hasNextToken()) {
-            System.out.println(t.nextToken());
-        }*/
+    public static void run(String code) {
+        long time = System.currentTimeMillis();
+        variables.clear();
+        Lia.ide.clear();
+        print("Executing...\n");
 
         boolean success = false;
-        for (String line : code.split("\n")) {
-            line = line.trim();
+        String[] lines = code.split("\n");
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i].trim();
+            if (line.isEmpty()) continue;
             Tokenizer tokenizer = new Tokenizer(line);
             for (Parser parser : parsers) {
                 if (parser.shouldParse(line)) {
@@ -34,12 +34,10 @@ public class Runtime {
             }
 
             if (!success)
-                throw new IllegalArgumentException("Invalid line: " + line); // throw exception if code was invalid
+                throwException("Invalid Code [ " + line + " ] on line #" + i); // throw exception if code was invalid
         }
 
-        /*for (Variable v : variables) { // For all variables in the stored variable list for this block
-            System.out.println(v.getValue());
-        }*/
+        print("\nProgram Executed in " + (System.currentTimeMillis() - time) + "ms");
     }
 
     public static void addVariable(Variable variable) {
@@ -62,6 +60,10 @@ public class Runtime {
     }
 
     public static void print(Object value) {
-        System.out.println((value == null) ? "<Error> NullPointerException!" : value.toString());
+        Lia.ide.outputLine((value == null) ? "<Error> NullPointerException!" : value.toString());
+    }
+
+    public static void throwException(String e){
+        print("<EXCEPTION> " + e);
     }
 }

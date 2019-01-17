@@ -27,4 +27,8 @@ public class Variable {
     public void setValue(Object value) {
         this.value = value;
     }
+
+    public void setType(VarType type) {
+        this.type = type;
+    }
 }

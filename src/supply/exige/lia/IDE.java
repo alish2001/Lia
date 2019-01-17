@@ -2,13 +2,11 @@ package supply.exige.lia;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class IDE extends JFrame {
@@ -31,16 +29,16 @@ public class IDE extends JFrame {
 		pack(); // Fill entire window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close When the exit button is pressed
 		setLocationRelativeTo(null); // Center window
-		setTitle("Lia IDE | IN-DEV v0.0");
+		setTitle("Lia IDE | IN-DEV v0.1");
 		
-		initializeElements();
+		startIDE();
 		
 		setVisible(true); // Show window
 	}
 	
-	private void initializeElements() {
+	private void startIDE() {
 		//https://docs.oracle.com/javase/tutorial/uiswing/layout/box.html
-		output.append("<Lia Interpreter v1.0>\n");
+		outputLine("<Lia Interpreter v1.0>\n");
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		
 		JScrollPane inputPane = new JScrollPane(input, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -48,12 +46,18 @@ public class IDE extends JFrame {
 		mainPanel.add(inputPane);
 		mainPanel.add(outputPane);
 		JButton button = new JButton("Run");
+		button.addActionListener(e -> Runtime.run(input.getText())); // Execute runtime on launch
 		button.setSize(new Dimension(100, 10));
+        button.setFocusPainted(false);
 		mainPanel.add(button);
 		add(mainPanel);
-		//getContentPane().add(new JTextArea(), BorderLayout.WEST);
 	}
-	
-	
 
+	public void outputLine(String str) {
+        output.append(str + "\n");
+    }
+
+    public void clear(){
+	    output.setText("<Lia Interpreter v1.0>\n");
+    }
 }

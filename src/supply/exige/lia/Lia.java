@@ -10,9 +10,6 @@ public class Lia {
 
     public static void main(String[] args) throws ScriptException {
         ide = new IDE();
-        Runtime.code = "var string meme2 = \"im happy\"\n" +
-                " print (meme2)";
-        Runtime.run();
         ScriptEngineManager m = new ScriptEngineManager(); // ez
         ScriptEngine engine = m.getEngineByName("JavaScript");
         String evalu = "(2+2)*5";
