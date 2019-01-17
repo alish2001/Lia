@@ -8,9 +8,9 @@ public class PrintVarParser extends Parser {
 
     @Override
     public boolean shouldParse(String line) {
-        return line.matches("[\\s]*print[\\s]*\\([\\s]*[a-zA-Z][a-zA-Z0-9]*[\\s]*\\)");
+        return line.matches("[\\s]*print[\\s]*\\([\\s]*[a-zA-Z_][a-zA-Z0-9_]*[\\s]*\\)");
     }
-
+    
     @Override
     public void parse(Tokenizer tokenizer) {
         tokenizer.nextToken(); // Skip "print" token

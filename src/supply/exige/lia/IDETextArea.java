@@ -20,5 +20,4 @@ public class IDETextArea extends JTextArea {
 		setBackground(bgColor);
 		setEditable(editable);
 	}
-
 }
