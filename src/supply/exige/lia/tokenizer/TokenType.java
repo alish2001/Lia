@@ -5,6 +5,9 @@ public enum TokenType {
     /** An empty token.*/
     EMPTY,
 
+    /** An append used to append multiple variables. (e.g. "Test".2)*/
+    APPEND,
+
     /** A token. (e.g. () = , )*/
     TOKEN,
 

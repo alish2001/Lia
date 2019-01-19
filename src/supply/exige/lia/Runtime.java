@@ -9,11 +9,15 @@ import java.util.List;
 
 public class Runtime {
 
-    final static Parser[] parsers = new Parser[]{new VariableParser(), new VariableAssignmentParser(), new PrintVarParser(), new PrintStringParser(), new PrintIntParser()};
+    final static Parser[] parsers = new Parser[]{new VariableParser(), new PrintVarParser()};
 
     public static List<Variable> variables = new ArrayList<>();
 
     public static void run(String code) {
+        /*Tokenizer t = new Tokenizer(code);
+        while (t.hasNextToken()) {
+            System.out.println(t.nextToken());
+        }*/
         long time = System.currentTimeMillis();
         variables.clear();
         Lia.ide.clear();
@@ -26,8 +30,9 @@ public class Runtime {
             if (line.isEmpty()) continue;
             Tokenizer tokenizer = new Tokenizer(line);
             for (Parser parser : parsers) {
-                if (parser.shouldParse(line)) {
-                    parser.parse(tokenizer);
+                int parseCode = parser.shouldParse(line);
+                if (parseCode != 0) {
+                    parser.parse(tokenizer, parseCode);
                     success = true; // Successful run
                     break;
                 }
@@ -41,7 +46,12 @@ public class Runtime {
     }
 
     public static void addVariable(Variable variable) {
-        variables.add(variable);
+        if (getVariable(variable.getName()) == null) {
+            variables.add(variable);
+        } else {
+            getVariable(variable.getName()).setValue(variable.getValue());
+            getVariable(variable.getName()).setType(variable.getType());
+        }
     }
 
     public static Variable getVariable(String name) {
@@ -63,7 +73,7 @@ public class Runtime {
         Lia.ide.outputLine((value == null) ? "<Error> NullPointerException!" : value.toString());
     }
 
-    public static void throwException(String e){
+    public static void throwException(String e) {
         print("<EXCEPTION> " + e);
     }
 }

@@ -8,12 +8,12 @@ public class Tokenizer {
     // Register regex patterns for tokens
     private final TokenData[] tokenDatas =  new TokenData[]{new TokenData(Pattern.compile("^([a-zA-Z_][a-zA-Z0-9_]*)"), TokenType.IDENTIFIER),
             new TokenData(Pattern.compile("^((-)?[0-9]+)"), TokenType.INTEGER),
-            new TokenData(Pattern.compile("^(\".*\")"), TokenType.STRING),
+            new TokenData(Pattern.compile("^([\"]+([^\"].[^\"]*)[\"]+)"), TokenType.STRING),
             new TokenData(Pattern.compile("^(=)"), TokenType.TOKEN),
             new TokenData(Pattern.compile("^(\\()"), TokenType.TOKEN),
             new TokenData(Pattern.compile("^(\\))"), TokenType.TOKEN),
             new TokenData(Pattern.compile("^(\\+)"), TokenType.TOKEN),
-            new TokenData(Pattern.compile("^(\\.)"), TokenType.TOKEN)}; // add expression processing token {}
+            new TokenData(Pattern.compile("^(\\.)"), TokenType.APPEND)}; // add expression processing token {}
 
     private String input;
 

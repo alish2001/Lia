@@ -7,10 +7,10 @@ public abstract class Parser {
     /**
      * Checks to see if the line provided is to be parsed by this parser
      */
-    public abstract boolean shouldParse(String line);
+    public abstract int shouldParse(String line);
 
     /**
      * Take the superblock and tokenizer for the line and returns a block of this parser's type
      */
-    public abstract void parse(Tokenizer tokenizer);
+    public abstract void parse(Tokenizer tokenizer, int code);
 }
