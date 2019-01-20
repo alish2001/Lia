@@ -47,7 +47,7 @@ public class VariableParser extends Parser {
             Token valueToken = tokenizer.nextToken(); // retrieve variable token
             boolean append = false;
             if (valueToken.getType() == TokenType.APPEND && tokenizer.hasNextToken()) {
-                valueToken = tokenizer.nextToken(); // If the value is the append "." skip*/
+                valueToken = tokenizer.nextToken(); // If the value is the append "." skip  */
                 append = true;
             }
             assignVariable(name, type, valueToken, append);
@@ -68,10 +68,18 @@ public class VariableParser extends Parser {
             } else {
                 Runtime.throwException("NullPointerException: Variable " + valueToken.toString() + " does not exist or has not been declared.");
             }
-        } else if (valueToken.getType() == TokenType.INTEGER && type == VarType.INT) { // If the token & type are integer
-            value = Integer.valueOf(valueToken.toString()); // Store the integer value of the token
-        } else if (valueToken.getType() == TokenType.STRING && type == VarType.STRING) { // If the token is a string
-            value = valueToken.toString(); // Store the string value
+        } else if (type == VarType.INT) { // If the token & type are integer
+            if (valueToken.getType() == TokenType.INTEGER){
+                value = Integer.valueOf(valueToken.toString()); // Store the integer value of the token
+            } else if (valueToken.getType() == TokenType.MATH_EXPRESSION) {
+                value = Runtime.parseMathExpr(valueToken.toString());
+            }
+        } else if (type == VarType.STRING) { // If the token is a string
+            if (valueToken.getType() == TokenType.STRING){
+                value = valueToken.toString(); // Store the string value
+            } else if (valueToken.getType() == TokenType.MATH_EXPRESSION) {
+                value = Runtime.parseMathExpr(valueToken.toString());
+            }
         }
 
         if (Runtime.getVariable(name) != null && type == VarType.STRING && append) {

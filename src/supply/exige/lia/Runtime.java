@@ -2,14 +2,18 @@ package supply.exige.lia;
 
 import supply.exige.lia.parser.*;
 import supply.exige.lia.tokenizer.Tokenizer;
+import supply.exige.lia.variables.VarType;
 import supply.exige.lia.variables.Variable;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Runtime {
 
-    final static Parser[] parsers = new Parser[]{new VariableParser(), new PrintVarParser()};
+    final static Parser[] parsers = new Parser[]{new VariableParser(), new PrintParser()};
 
     public static List<Variable> variables = new ArrayList<>();
 
@@ -18,6 +22,7 @@ public class Runtime {
         while (t.hasNextToken()) {
             System.out.println(t.nextToken());
         }*/
+        
         long time = System.currentTimeMillis();
         variables.clear();
         Lia.ide.clear();
@@ -42,7 +47,7 @@ public class Runtime {
                 throwException("Invalid Code [ " + line + " ] on line #" + i); // throw exception if code was invalid
         }
 
-        print("\nProgram Executed in " + (System.currentTimeMillis() - time) + "ms");
+        print("\nProgram Compiled & Executed in " + (System.currentTimeMillis() - time) + "ms");
     }
 
     public static void addVariable(Variable variable) {
@@ -75,5 +80,21 @@ public class Runtime {
 
     public static void throwException(String e) {
         print("<EXCEPTION> " + e);
+    }
+
+    public static int parseMathExpr(String expr) {
+        ScriptEngineManager manager = new ScriptEngineManager(); // ez
+        ScriptEngine engine = manager.getEngineByName("JavaScript");
+        int result = 0;
+        try {
+            for (Variable v : variables) {
+                if (v.getType() != VarType.INT) continue;
+                engine.eval("var " + v.getName() + " = " + v.getValue() + ";");
+            }
+            result = Double.valueOf(engine.eval(expr).toString()).intValue();
+        } catch (ScriptException e) {
+            throwException("ExpressionException: Error while processing math expression.");
+        }
+        return result;
     }
 }
