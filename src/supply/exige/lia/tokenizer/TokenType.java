@@ -5,6 +5,9 @@ public enum TokenType {
     /** An empty token.*/
     EMPTY,
 
+    /** A comment. Just like this one. */
+    COMMENT,
+
     /** A token. */
     TOKEN,
 

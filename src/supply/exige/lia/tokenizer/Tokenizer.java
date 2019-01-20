@@ -1,5 +1,7 @@
 package supply.exige.lia.tokenizer;
 
+import supply.exige.lia.Runtime;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,8 @@ public class Tokenizer {
             new TokenData(Pattern.compile("^(=)"), TokenType.TOKEN),
             new TokenData(Pattern.compile("^(\\()"), TokenType.BRACKET),
             new TokenData(Pattern.compile("^(\\))"), TokenType.BRACKET),
-            new TokenData(Pattern.compile("^(\\.)"), TokenType.APPEND)}; // add expression processing token {}
+            new TokenData(Pattern.compile("^(\\.)"), TokenType.APPEND),
+            new TokenData(Pattern.compile("^(//)+.*"), TokenType.COMMENT)};
 
     private String input;
 
@@ -49,7 +52,9 @@ public class Tokenizer {
                 }
             }
         }
-        throw new IllegalStateException("<Tokenizer> Could not tokenize " + input); // Throw exception if input cannot be parsed
+
+        Runtime.throwException( "<SyntaxError> Invalid code: " + input); // Throw exception if input cannot be parsed
+        return (lastToken = new Token("", TokenType.EMPTY));
     }
 
     public boolean hasNextToken() {

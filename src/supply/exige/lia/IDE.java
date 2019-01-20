@@ -46,7 +46,7 @@ public class IDE extends JFrame {
 		mainPanel.add(inputPane);
 		mainPanel.add(outputPane);
 		JButton button = new JButton("Run");
-		button.addActionListener(e -> Runtime.run(input.getText())); // Execute runtime on launch
+		button.addActionListener(e -> Runtime.run(input.getDocument())); // Execute runtime on launch
 		button.setSize(new Dimension(100, 10));
         button.setFocusPainted(false);
 		mainPanel.add(button);

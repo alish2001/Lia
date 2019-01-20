@@ -8,6 +8,7 @@ import supply.exige.lia.variables.Variable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.swing.text.Document;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +18,22 @@ public class Runtime {
 
     public static List<Variable> variables = new ArrayList<>();
 
-    public static void run(String code) {
+    public static void run(Document doc) {
         /*Tokenizer t = new Tokenizer(code);
         while (t.hasNextToken()) {
             System.out.println(t.nextToken());
         }*/
-        
+
+        Compiler.feedCode(doc);
+        Compiler.compile();
+
         long time = System.currentTimeMillis();
         variables.clear();
         Lia.ide.clear();
         print("Executing...\n");
 
         boolean success = false;
-        String[] lines = code.split("\n");
+        String[] lines = Compiler.code;
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i].trim();
             if (line.isEmpty()) continue;
@@ -65,13 +69,6 @@ public class Runtime {
             if (v.getName().equals(name)) return v; // return variable if the identifiers match
         }
         return null; // no matches found
-    }
-
-    public static void setVariableValue(String identifier, Object value) {
-        for (int i = 0; i < variables.size(); i++) {
-            if (!variables.get(i).getName().equals(identifier)) continue; // If the names do not match, skip
-            variables.get(i).setValue(value); // Set the new value of found variable
-        }
     }
 
     public static void print(Object value) {
