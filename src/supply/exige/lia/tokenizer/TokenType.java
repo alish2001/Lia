@@ -2,30 +2,48 @@ package supply.exige.lia.tokenizer;
 
 public enum TokenType {
 
-    /** An empty token.*/
+    /**
+     * An empty token.
+     */
     EMPTY,
 
-    /** A comment. Just like this one. */
+    /**
+     * A comment. Just like this one.
+     */
     COMMENT,
 
-    /** A token. */
+    /**
+     * A token.
+     */
     TOKEN,
 
-    /** An append used to append multiple variables. (e.g. "Test".2)*/
+    /**
+     * An append used to append multiple variables. (e.g. "Test".2)
+     */
     APPEND,
 
-    /** A mathematical expression. {2+2}*/
+    /**
+     * A mathematical expression. {2+2}
+     */
     MATH_EXPRESSION,
 
-    /** A barcket. () */
+    /**
+     * A barcket. ()
+     */
     BRACKET,
 
-    /** Starts with a letter, proceeding with letters/numbers */
+    /**
+     * Starts with a letter, proceeding with letters/numbers
+     */
     IDENTIFIER,
 
-    /** A number.*/
+    /**
+     * A number.
+     */
     INTEGER,
 
-    /** Anything in double quotes.*/
+    /**
+     * Anything in double quotes.
+     */
     STRING
 }

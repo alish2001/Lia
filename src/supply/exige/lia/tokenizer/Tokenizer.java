@@ -6,11 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Tokenizer {
-	
+
     // Register regex patterns for tokens
-    private final TokenData[] tokenDatas =  new TokenData[]{new TokenData(Pattern.compile("^([a-zA-Z_][a-zA-Z0-9_]*)"), TokenType.IDENTIFIER),
+    private final TokenData[] tokenDatas = new TokenData[]{new TokenData(Pattern.compile("^([a-zA-Z_][a-zA-Z0-9_]*)"), TokenType.IDENTIFIER),
             new TokenData(Pattern.compile("^((-)?[0-9]+)"), TokenType.INTEGER),
-            new TokenData(Pattern.compile("^([\"]+(.*[\"]*)[\"]+)"), TokenType.STRING),
+            new TokenData(Pattern.compile("^([\"]+[\\sa-zA-Z0-9_^]*[\"]+)"), TokenType.STRING),
             new TokenData(Pattern.compile("^([{]+([^{].*[^}]*)[}]+)"), TokenType.MATH_EXPRESSION),
             new TokenData(Pattern.compile("^(=)"), TokenType.TOKEN),
             new TokenData(Pattern.compile("^(\\()"), TokenType.BRACKET),
@@ -48,12 +48,12 @@ public class Tokenizer {
                 if (data.getType() == TokenType.STRING) { // If the current pattern matched is a string
                     return (lastToken = new Token(token.substring(1, token.length() - 1), TokenType.STRING)); // return result, skipping the start and end quotes.
                 } else {
-                    return (lastToken = new Token(token, data.getType()));
+                    return (lastToken = new Token(token, data.getType())); // Return empty token
                 }
             }
         }
 
-        Runtime.throwException( "<SyntaxError> Invalid code: " + input); // Throw exception if input cannot be parsed
+        Runtime.throwException("<SyntaxError> Invalid code: " + input); // Throw exception if input cannot be parsed
         return (lastToken = new Token("", TokenType.EMPTY));
     }
 

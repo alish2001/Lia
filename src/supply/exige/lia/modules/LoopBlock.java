@@ -1,4 +1,4 @@
-package supply.exige.lia;
+package supply.exige.lia.modules;
 
 public class LoopBlock {
 
@@ -21,7 +21,7 @@ public class LoopBlock {
         this.code = code;
     }
 
-    public void setNumberOfIterations(int iterations){
+    public void setNumberOfIterations(int iterations) {
         numberOfIterations = iterations;
     }
 

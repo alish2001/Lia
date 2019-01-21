@@ -5,13 +5,13 @@ public class Token {
     private String token;
     private TokenType type;
 
-    public Token(String token, TokenType type){
+    public Token(String token, TokenType type) {
         this.token = token;
         this.type = type;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return token;
     }
 

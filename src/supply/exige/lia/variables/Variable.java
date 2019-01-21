@@ -6,7 +6,7 @@ public class Variable {
     private VarType type;
     private Object value;
 
-    public Variable(String identifier, VarType type, Object value){
+    public Variable(String identifier, VarType type, Object value) {
         this.identifier = identifier;
         this.type = type;
         this.value = value;
@@ -20,7 +20,7 @@ public class Variable {
         return type;
     }
 
-    public Object getValue(){
+    public Object getValue() {
         return value;
     }
 

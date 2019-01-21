@@ -69,13 +69,13 @@ public class VariableParser extends Parser {
                 Runtime.throwException("NullPointerException: Variable " + valueToken.toString() + " does not exist or has not been declared.");
             }
         } else if (type == VarType.INT) { // If the token & type are integer
-            if (valueToken.getType() == TokenType.INTEGER){
+            if (valueToken.getType() == TokenType.INTEGER) {
                 value = Integer.valueOf(valueToken.toString()); // Store the integer value of the token
             } else if (valueToken.getType() == TokenType.MATH_EXPRESSION) {
                 value = Runtime.parseMathExpr(valueToken.toString());
             }
         } else if (type == VarType.STRING) { // If the token is a string
-            if (valueToken.getType() == TokenType.STRING){
+            if (valueToken.getType() == TokenType.STRING) {
                 value = valueToken.toString(); // Store the string value
             } else if (valueToken.getType() == TokenType.MATH_EXPRESSION) {
                 value = Runtime.parseMathExpr(valueToken.toString());

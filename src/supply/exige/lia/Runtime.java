@@ -1,6 +1,8 @@
 package supply.exige.lia;
 
-import supply.exige.lia.parser.*;
+import supply.exige.lia.parser.Parser;
+import supply.exige.lia.parser.PrintParser;
+import supply.exige.lia.parser.VariableParser;
 import supply.exige.lia.tokenizer.Tokenizer;
 import supply.exige.lia.variables.VarType;
 import supply.exige.lia.variables.Variable;
@@ -12,24 +14,33 @@ import javax.swing.text.Document;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Lia Runtime.
+ * Runs compiled Lia code.
+ *
+ * @author Ali Shariatmadari
+ */
+
 public class Runtime {
 
     final static Parser[] parsers = new Parser[]{new VariableParser(), new PrintParser()};
 
     public static List<Variable> variables = new ArrayList<>();
 
+    /**
+     * Runs & Compiles code
+     *
+     * @param doc Code document
+     */
     public static void run(Document doc) {
-        /*Tokenizer t = new Tokenizer(code);
-        while (t.hasNextToken()) {
-            System.out.println(t.nextToken());
-        }*/
-
         Compiler.feedCode(doc);
         Compiler.compile();
 
+        printProcessing("<Runtime> Clearing past run...");
         long time = System.currentTimeMillis();
         variables.clear();
-        Lia.ide.clear();
+        Lia.ide.clear(); // Clear output console
+        Lia.ide.clearProcessing(); // Clear processing console
         print("Executing...\n");
 
         boolean success = false;
@@ -39,6 +50,7 @@ public class Runtime {
             if (line.isEmpty()) continue;
             Tokenizer tokenizer = new Tokenizer(line);
             for (Parser parser : parsers) {
+                printProcessing("<Runtime> Parsing line #" + i);
                 int parseCode = parser.shouldParse(line);
                 if (parseCode != 0) {
                     parser.parse(tokenizer, parseCode);
@@ -54,7 +66,13 @@ public class Runtime {
         print("\nProgram Compiled & Executed in " + (System.currentTimeMillis() - time) + "ms");
     }
 
+    /**
+     * Assigns/Reassigns variables
+     *
+     * @param variable
+     */
     public static void addVariable(Variable variable) {
+        printProcessing("Assigning variable + " + variable.getName());
         if (getVariable(variable.getName()) == null) {
             variables.add(variable);
         } else {
@@ -63,24 +81,25 @@ public class Runtime {
         }
     }
 
+    /**
+     * Returns variables based on identifier
+     *
+     * @return {@link Variable}
+     */
     public static Variable getVariable(String name) {
-
         for (Variable v : variables) { // For all variables in the stored variable list for this block
             if (v.getName().equals(name)) return v; // return variable if the identifiers match
         }
         return null; // no matches found
     }
 
-    public static void print(Object value) {
-        Lia.ide.outputLine((value == null) ? "<Error> NullPointerException!" : value.toString());
-    }
-
-    public static void throwException(String e) {
-        print("<EXCEPTION> " + e);
-    }
-
+    /**
+     * Parses mathematical expressions using the JavaScript engine
+     *
+     * @param expr
+     */
     public static int parseMathExpr(String expr) {
-        System.out.println("parsing " + expr);
+        printProcessing("<Runtime> Parsing " + expr);
         ScriptEngineManager manager = new ScriptEngineManager(); // ez
         ScriptEngine engine = manager.getEngineByName("JavaScript");
         int result = 0;
@@ -88,12 +107,38 @@ public class Runtime {
             for (Variable v : variables) {
                 if (v.getType() != VarType.INT) continue;
                 engine.eval("var " + v.getName() + " = " + v.getValue() + ";");
-                System.out.println("var " + v.getName() + " = " + v.getValue() + ";");
             }
             result = Double.valueOf(engine.eval(expr).toString()).intValue();
         } catch (ScriptException e) {
             throwException("ExpressionException: Error while processing math expression.");
         }
         return result;
+    }
+
+    /**
+     * Prints to output console
+     *
+     * @param value
+     */
+    public static void print(Object value) {
+        Lia.ide.outputLine((value == null) ? "<Error> NullPointerException!" : value.toString());
+    }
+
+    /**
+     * Throws exceptions to output console
+     *
+     * @param e
+     */
+    public static void throwException(String e) {
+        print("<EXCEPTION> " + e);
+    }
+
+    /**
+     * Prints to backend processing console
+     *
+     * @param e
+     */
+    public static void printProcessing(String str) {
+        Lia.ide.outputProcessing(str);
     }
 }
