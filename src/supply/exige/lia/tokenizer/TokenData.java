@@ -2,6 +2,11 @@ package supply.exige.lia.tokenizer;
 
 import java.util.regex.Pattern;
 
+/**
+ * An object for storing regex patterns for the {@link Tokenizer}
+ *
+ * @Author Ali Shariatmadari
+ */
 public class TokenData {
 
     private Pattern pattern;

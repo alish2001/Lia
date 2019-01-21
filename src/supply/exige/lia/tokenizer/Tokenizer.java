@@ -5,6 +5,11 @@ import supply.exige.lia.Runtime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Tokenizes code into parsable bits.
+ *
+ * @Author Ali Shariatmadari
+ */
 public class Tokenizer {
 
     // Register regex patterns for tokens
@@ -18,10 +23,8 @@ public class Tokenizer {
             new TokenData(Pattern.compile("^(\\.)"), TokenType.APPEND),
             new TokenData(Pattern.compile("^(//)+.*"), TokenType.COMMENT)};
 
-    private String input;
-
-    private Token lastToken;
-    private boolean pushBack;
+    private String input; // Input to be tokenized
+    private Token lastToken; // Last tokenized token
 
     public Tokenizer(String tokenStr) {
         this.input = tokenStr;
@@ -29,11 +32,6 @@ public class Tokenizer {
 
     public Token nextToken() {
         input = input.trim(); // Get rid of whitespace
-
-        if (pushBack) {
-            pushBack = false;
-            return lastToken;
-        }
 
         if (input.isEmpty()) { // If the input is empty, return empty token
             return (lastToken = new Token("", TokenType.EMPTY));
@@ -59,11 +57,5 @@ public class Tokenizer {
 
     public boolean hasNextToken() {
         return !input.isEmpty(); // If there is no more input left to process, there are no further tokens to parse
-    }
-
-    public void pushBack() {
-        if (lastToken != null) {
-            this.pushBack = true;
-        }
     }
 }

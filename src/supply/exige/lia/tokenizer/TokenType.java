@@ -1,5 +1,10 @@
 package supply.exige.lia.tokenizer;
 
+/**
+ * An enumerator for holding various types of tokens.
+ *
+ * @Author Ali Shariatmadari
+ */
 public enum TokenType {
 
     /**

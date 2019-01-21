@@ -13,6 +13,7 @@ public class IDE extends JFrame {
     public final static int WIDTH = 1000;
     public final static int HEIGHT = WIDTH / 16 * 9;
 
+    // Text areas
     private IDETextArea input = new IDETextArea();
     private IDETextArea output = new IDETextArea(Color.GREEN, Color.BLACK, false);
     private IDETextArea help = new IDETextArea(Color.MAGENTA, Color.WHITE, false);
@@ -28,35 +29,40 @@ public class IDE extends JFrame {
         setLocationRelativeTo(null); // Center window
         setIconImage(ResourceLoader.getImageIcon("LiaLogo.png").getImage());
         setTitle("Lia IDE | v" + VERSION);
-        outputLine("<Lia Interpreter v1.0>\n");
 
 
+        // Main panel for input and output
         JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+
+        // Right panel for help screen
         JSplitPane rightPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-
+        // Create ScrollPanes out of IDETextAreas
         JScrollPane inputPane = new JScrollPane(input, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         JScrollPane outputPane = new JScrollPane(output, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         JScrollPane helpPane = new JScrollPane(help, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         JScrollPane processingOutputPane = new JScrollPane(processingOutput, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        rightPane.setDividerLocation(HEIGHT / 2 - 60);
-        rightPane.setTopComponent(helpPane);
-        rightPane.setBottomComponent(processingOutputPane);
+        rightPane.setDividerLocation(HEIGHT / 2 - 60); // Split the right pane into 2 with an offset
+        rightPane.setTopComponent(helpPane); // Add help area
+        rightPane.setBottomComponent(processingOutputPane); // Add processing output
 
+        // Add I/O panes
         mainPanel.add(inputPane);
         mainPanel.add(outputPane);
 
+        // Add run button
         JButton button = new JButton("Run");
-        button.addActionListener(e -> Runtime.run(input.getDocument())); // Execute runtime on launch
+        button.addActionListener(e -> Runtime.run(input.getDocument())); // Execute runtime on launch using lambda expression
         mainPanel.add(button);
 
-        mainSplitPane.setDividerLocation(WIDTH - 300);
+        mainSplitPane.setDividerLocation(WIDTH - 300); // Set left and right hand position
         mainSplitPane.setRightComponent(rightPane);
         mainSplitPane.setLeftComponent(mainPanel);
 
+        // Help text
         String help = "Welcome to the Lia IDE!\n" +
                 "Lia is a basic but capable programming language\n" +
                 "intended to teach ordinary people the basics of programming!\n" +
@@ -92,11 +98,14 @@ public class IDE extends JFrame {
 
                 "Rules:\n" +
                 "- ONE statement per line\n" +
-                "- No nested loops";
+                "- No nested loops\n" +
+                "- No Doubles! Everything will be output/stored in integers.";
+        // Set default values
         setHelp(help);
         input.setText("// Type some code :)");
-
-        add(mainSplitPane);
+        clear();
+        clearProcessing();
+        add(mainSplitPane); // Add the final pane into the JFrame
     }
 
     public void startIDE() {
@@ -104,10 +113,20 @@ public class IDE extends JFrame {
         requestFocus();
     }
 
+    /**
+     * Outputs a line through the IDE.
+     *
+     * @param str
+     */
     public void outputLine(String str) {
         output.append(str + "\n");
     }
 
+    /**
+     * Outputs a line through the IDE's processing backend.
+     *
+     * @param str
+     */
     public void outputProcessing(String str) {
         processingOutput.append(str + "\n");
     }
@@ -116,11 +135,17 @@ public class IDE extends JFrame {
         help.setText(str);
     }
 
+    /**
+     * Clears output console.
+     */
     public void clear() {
         output.setText("<Lia Interpreter v1.0>\n");
     }
 
+    /**
+     * Clears output backend console.
+     */
     public void clearProcessing() {
-        processingOutput.setText("");
+        processingOutput.setText("<Lia Interpreter Backend>\n");
     }
 }

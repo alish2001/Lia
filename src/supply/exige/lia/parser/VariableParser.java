@@ -7,14 +7,19 @@ import supply.exige.lia.tokenizer.Tokenizer;
 import supply.exige.lia.variables.VarType;
 import supply.exige.lia.variables.Variable;
 
+/**
+ * Parses syntax related to {@link Variable}s
+ *
+ * @author Ali Shariatmadari
+ */
 public class VariableParser extends Parser {
 
     @Override
     public int shouldParse(String line) {
         int code = 0;
-        if (line.matches("var[\\s]+[a-zA-Z]+[\\s]+[a-zA-Z_][a-zA-Z0-9_]*[\\s]*=?[\\s]*\"?.*\"?")) {
+        if (line.matches("var[\\s]+[a-zA-Z]+[\\s]+[a-zA-Z_][a-zA-Z0-9_]*[\\s]*=?[\\s]*\"?.*\"?")) { // If the line is a variable declaration
             code = 1;
-        } else if (line.matches("[\\s]*[a-zA-Z][a-zA-Z0-9]*[\\s]*=[\\s]*\"?.*\"?")) {
+        } else if (line.matches("[\\s]*[a-zA-Z][a-zA-Z0-9]*[\\s]*=[\\s]*\"?.*\"?")) { // If the line is a variable instantiation
             code = 2;
         }
         return code;
@@ -78,12 +83,13 @@ public class VariableParser extends Parser {
             if (valueToken.getType() == TokenType.STRING) {
                 value = valueToken.toString(); // Store the string value
             } else if (valueToken.getType() == TokenType.MATH_EXPRESSION) {
-                value = Runtime.parseMathExpr(valueToken.toString());
+                value = Runtime.parseMathExpr(valueToken.toString()); // Parse and store expression result
             }
         }
 
+        // If the variable exists, is a string, and appending is required
         if (Runtime.getVariable(name) != null && type == VarType.STRING && append) {
-            value = Runtime.getVariable(name).getValue().toString() + value;
+            value = Runtime.getVariable(name).getValue().toString() + value; // Append value
         }
         Runtime.addVariable(new Variable(name, type, value)); // Store variable in runtime memory
     }

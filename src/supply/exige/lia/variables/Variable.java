@@ -1,5 +1,10 @@
 package supply.exige.lia.variables;
 
+/**
+ * An object for variables found in the code during Runtime.
+ *
+ * @Author Ali Shariatmadari
+ */
 public class Variable {
 
     private String identifier;

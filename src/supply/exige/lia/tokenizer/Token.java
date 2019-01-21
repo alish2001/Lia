@@ -1,5 +1,10 @@
 package supply.exige.lia.tokenizer;
 
+/**
+ * An object for storing tokens tokenized by the {@link Tokenizer}
+ *
+ * @Author Ali Shariatmadari
+ */
 public class Token {
 
     private String token;

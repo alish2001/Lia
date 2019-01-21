@@ -3,6 +3,11 @@ package supply.exige.lia.IDE;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * An object for holding text area properties of the Lia IDE.
+ *
+ * @Author Ali Shariatmadari
+ */
 public class IDETextArea extends JTextArea {
 
     public IDETextArea() {

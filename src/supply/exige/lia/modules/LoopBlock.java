@@ -1,5 +1,10 @@
 package supply.exige.lia.modules;
 
+/**
+ * An object for storing blocks of code involving loops.
+ *
+ * @Author Ali Shariatmadari
+ */
 public class LoopBlock {
 
     private String[] code;
