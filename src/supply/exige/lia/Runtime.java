@@ -72,7 +72,7 @@ public class Runtime {
      * @param variable
      */
     public static void addVariable(Variable variable) {
-        printProcessing("Assigning variable + " + variable.getName());
+        printProcessing("Assigning variable " + variable.getName());
         if (getVariable(variable.getName()) == null) {
             variables.add(variable);
         } else {
