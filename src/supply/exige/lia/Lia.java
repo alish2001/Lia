@@ -7,7 +7,9 @@ import javax.swing.*;
 
 /**
  * The main class of the Lia IDE.
- *
+ * Course: ICS4U - Culminating Project
+ * Teacher: Mr.Kordbacheh
+ * 
  * @author Ali Shariatmadari
  */
 public class Lia {
