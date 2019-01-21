@@ -20,12 +20,13 @@ public class PrintParser extends Parser {
         tokenizer.nextToken(); // Skip "(" token
         String printValue = "";
         Token printToken = tokenizer.nextToken(); // retrieve print token;
+        boolean validToken = (printToken.getType() == TokenType.IDENTIFIER || printToken.getType() == TokenType.STRING || printToken.getType() == TokenType.INTEGER || printToken.getType() == TokenType.MATH_EXPRESSION);
         do {
             if (printToken.getType() == TokenType.APPEND && tokenizer.hasNextToken())
                 printToken = tokenizer.nextToken(); // If the value is the append ".", skip
             printValue += parsePrintValue(printToken);
             printToken = tokenizer.nextToken();
-        } while (tokenizer.hasNextToken() && printToken.getType() != TokenType.BRACKET);
+        } while (tokenizer.hasNextToken() && validToken);
 
         Runtime.print(printValue); // output parsed print value
         tokenizer.nextToken(); // Skip ")" token

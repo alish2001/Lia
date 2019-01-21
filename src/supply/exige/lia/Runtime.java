@@ -80,6 +80,7 @@ public class Runtime {
     }
 
     public static int parseMathExpr(String expr) {
+        System.out.println("parsing " + expr);
         ScriptEngineManager manager = new ScriptEngineManager(); // ez
         ScriptEngine engine = manager.getEngineByName("JavaScript");
         int result = 0;
@@ -87,6 +88,7 @@ public class Runtime {
             for (Variable v : variables) {
                 if (v.getType() != VarType.INT) continue;
                 engine.eval("var " + v.getName() + " = " + v.getValue() + ";");
+                System.out.println("var " + v.getName() + " = " + v.getValue() + ";");
             }
             result = Double.valueOf(engine.eval(expr).toString()).intValue();
         } catch (ScriptException e) {
